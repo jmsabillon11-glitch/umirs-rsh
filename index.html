@@ -7,7 +7,9 @@
   <title>UMIRS | Sistema RSH</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -114,7 +116,8 @@
       color: #176b45;
     }
 
-    .cargando, .error {
+    .cargando,
+    .error {
       text-align: center;
       padding: 30px;
       background: white;
@@ -134,9 +137,17 @@
     }
 
     @media (max-width: 420px) {
-      body { padding: 12px; }
-      .grid { grid-template-columns: 1fr; }
-      .nombre { font-size: 22px; }
+      body {
+        padding: 12px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nombre {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
@@ -243,46 +254,52 @@
 <script>
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbzff_Ywo93wmRei_FPvwnS6f7_QWpITHxuDQW5u35THMjzU_6sS-D7tqweZaa3xRwCxzA/exec";
+"https://script.google.com/macros/s/AKfycbzGhT4qHhOKQDIjhs-KwgzSa3zUOLo_sbGvDHyFpmrmkBjrscbxO0VgUPtctGZSo1i3rg/exec";
 
 
-/* --------------------------------------------------
-   IDENTIFICAR ESTABLECIMIENTO
--------------------------------------------------- */
+/* IDENTIFICAR ESTABLECIMIENTO */
 
-const parametros = new URLSearchParams(window.location.search);
+const parametros =
+  new URLSearchParams(window.location.search);
 
-let codigo = parametros.get("codigo");
+let codigo =
+  parametros.get("codigo");
+
 
 /*
-   Mantiene funcionando nuestro QR piloto actual,
-   que todavía abre la página sin ?codigo=
+  Mantiene funcionando el QR piloto actual.
 */
 if (!codigo) {
   codigo = "RSH-2026-001";
 }
 
 
-/* --------------------------------------------------
-   CONSULTAR GOOGLE SHEETS
--------------------------------------------------- */
+/* CONSULTAR BASE CENTRAL */
 
 async function cargarDatos() {
 
   try {
 
     const respuesta =
-      await fetch(API_URL + "?codigo=" + encodeURIComponent(codigo));
+      await fetch(
+        API_URL +
+        "?codigo=" +
+        encodeURIComponent(codigo)
+      );
 
     if (!respuesta.ok) {
-      throw new Error("No fue posible consultar el sistema.");
+      throw new Error(
+        "No fue posible consultar el sistema."
+      );
     }
 
-    const datos = await respuesta.json();
+    const datos =
+      await respuesta.json();
 
     if (!datos.ok) {
       throw new Error(
-        datos.mensaje || "Registro no encontrado."
+        datos.mensaje ||
+        "Registro no encontrado."
       );
     }
 
@@ -292,9 +309,11 @@ async function cargarDatos() {
 
   catch (error) {
 
-    document.getElementById("cargando").style.display = "none";
+    document.getElementById("cargando")
+      .style.display = "none";
 
-    const cajaError = document.getElementById("error");
+    const cajaError =
+      document.getElementById("error");
 
     cajaError.style.display = "block";
 
@@ -307,66 +326,71 @@ async function cargarDatos() {
 }
 
 
-/* --------------------------------------------------
-   MOSTRAR INFORMACIÓN
--------------------------------------------------- */
+/* MOSTRAR INFORMACIÓN */
 
 function mostrarDatos(d) {
 
-  document.getElementById("codigo").textContent =
-    d.codigo || "—";
+  document.getElementById("codigo")
+    .textContent = d.codigo || "—";
 
-  document.getElementById("nombre").textContent =
-    d.establecimiento || "—";
+  document.getElementById("nombre")
+    .textContent = d.establecimiento || "—";
 
-  document.getElementById("tipo").textContent =
-    d.tipo || "—";
+  document.getElementById("tipo")
+    .textContent = d.tipo || "—";
 
-  document.getElementById("estadoPago").textContent =
-    d.estadoPago || "—";
+  document.getElementById("estadoPago")
+    .textContent = d.estadoPago || "—";
 
-  document.getElementById("vencimiento").textContent =
-    d.proximoVencimiento || "—";
+  document.getElementById("vencimiento")
+    .textContent = d.proximoVencimiento || "—";
 
-  document.getElementById("dias").textContent =
-    d.diasRecoleccion || "—";
+  document.getElementById("dias")
+    .textContent = d.diasRecoleccion || "—";
 
-  document.getElementById("frecuencia").textContent =
-    d.frecuenciaMes
+  document.getElementById("frecuencia")
+    .textContent =
+      d.frecuenciaMes
       ? d.frecuenciaMes + " recolecciones/mes"
       : "—";
 
-  document.getElementById("ultima").textContent =
-    d.ultimaRecoleccion || "—";
+  document.getElementById("ultima")
+    .textContent = d.ultimaRecoleccion || "—";
 
-  document.getElementById("proxima").textContent =
-    d.proximaRecoleccion || "—";
+  document.getElementById("proxima")
+    .textContent = d.proximaRecoleccion || "—";
 
-  document.getElementById("kg").textContent =
-    d.kgMesActual
+  document.getElementById("kg")
+    .textContent =
+      d.kgMesActual !== undefined
       ? d.kgMesActual + " kg"
       : "0 kg";
 
 
-  /* ESTADO VERDE / ROJO */
+  /* ESTADO DEL SERVICIO */
 
   const estado =
     document.getElementById("estado");
 
   const activo =
-    String(d.estadoServicio)
+    String(d.estadoServicio || "")
       .toUpperCase() === "ACTIVO";
+
 
   if (activo) {
 
-    estado.className = "estado activo";
+    estado.className =
+      "estado activo";
 
     estado.textContent =
       "🟢 SERVICIO ACTIVO";
 
-  } else {
+  }
 
-    estado.className = "estado inactivo";
+  else {
+
+    estado.className =
+      "estado inactivo";
 
     estado.textContent =
       "🔴 SERVICIO INACTIVO";
@@ -374,11 +398,11 @@ function mostrarDatos(d) {
   }
 
 
-  document.getElementById("cargando").style.display =
-    "none";
+  document.getElementById("cargando")
+    .style.display = "none";
 
-  document.getElementById("contenido").style.display =
-    "block";
+  document.getElementById("contenido")
+    .style.display = "block";
 
 }
 
