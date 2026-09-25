@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,7 @@
       padding: 20px;
       font-family: Arial, Helvetica, sans-serif;
       background: #f3f6f5;
-      color: #1f2937;
+      color: #172033;
     }
 
     .contenedor {
@@ -26,59 +27,60 @@
 
     .encabezado {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .encabezado h1 {
       margin: 0;
-      font-size: 24px;
-      color: #176b45;
+      color: #08743f;
+      font-size: 26px;
     }
 
     .encabezado p {
-      margin: 6px 0 0;
-      color: #64748b;
+      margin: 5px 0;
+      color: #536b8a;
       font-size: 14px;
     }
 
     .tarjeta {
       background: white;
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 22px;
-      box-shadow: 0 5px 18px rgba(0,0,0,.08);
-      margin-bottom: 15px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.08);
     }
 
     .codigo {
+      color: #536b8a;
       font-size: 14px;
-      color: #64748b;
       font-weight: bold;
       margin-bottom: 5px;
     }
 
     .nombre {
-      font-size: 25px;
+      font-size: 26px;
       font-weight: bold;
       margin-bottom: 4px;
     }
 
     .tipo {
       color: #64748b;
+      font-size: 16px;
       margin-bottom: 18px;
     }
 
     .estado {
-      padding: 14px;
-      border-radius: 12px;
+      padding: 16px;
+      border-radius: 13px;
+      text-align: center;
       font-size: 18px;
       font-weight: bold;
-      text-align: center;
       margin-bottom: 18px;
     }
 
     .activo {
-      background: #dcfce7;
-      color: #166534;
+      background: #d1fae5;
+      color: #066534;
     }
 
     .inactivo {
@@ -93,146 +95,308 @@
     }
 
     .dato {
-      background: #f8fafc;
+      background: #f7f9fb;
       padding: 13px;
       border-radius: 12px;
+      min-height: 64px;
     }
 
-    .dato span {
+    .etiqueta {
       display: block;
-      color: #64748b;
+      color: #536b8a;
       font-size: 12px;
       margin-bottom: 5px;
     }
 
-    .dato strong {
+    .valor {
+      display: block;
+      color: #081326;
       font-size: 15px;
+      font-weight: bold;
     }
 
-    .titulo-seccion {
+    .tituloSeccion {
+      color: #08743f;
       font-size: 16px;
       font-weight: bold;
-      margin-bottom: 12px;
-      color: #176b45;
+      margin-bottom: 14px;
     }
 
-    .cargando,
-    .error {
+    .kg {
+      background: #f7f9fb;
+      padding: 15px;
+      border-radius: 12px;
+    }
+
+    .cargando {
       text-align: center;
-      padding: 30px;
-      background: white;
-      border-radius: 18px;
+      padding: 35px;
+      color: #64748b;
     }
 
     .error {
-      color: #991b1b;
+      display: none;
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      color: #b91c1c;
+      box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    }
+
+    .error strong {
+      display: block;
+      margin-bottom: 15px;
     }
 
     .pie {
       text-align: center;
+      color: #8ca0c3;
       font-size: 12px;
-      color: #94a3b8;
+      line-height: 18px;
       margin-top: 18px;
-      line-height: 1.5;
     }
 
-    @media (max-width: 420px) {
+    #contenido {
+      display: none;
+    }
+
+    @media(max-width: 480px) {
+
       body {
-        padding: 12px;
+        padding: 14px;
       }
 
-      .grid {
-        grid-template-columns: 1fr;
+      .tarjeta {
+        padding: 18px;
       }
 
       .nombre {
-        font-size: 22px;
+        font-size: 23px;
       }
+
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
     }
   </style>
 </head>
+
 
 <body>
 
 <div class="contenedor">
 
   <div class="encabezado">
+
     <h1>UMIRS</h1>
+
     <p>Municipalidad de Siguatepeque</p>
-    <p>Sistema Municipal de Recolección de Residuos Hospitalarios</p>
+
+    <p>
+      Sistema Municipal de Recolección
+      de Residuos Hospitalarios
+    </p>
+
   </div>
 
-  <div id="cargando" class="cargando">
-    Consultando registro municipal...
+
+  <!-- CARGANDO -->
+
+  <div
+    id="cargando"
+    class="tarjeta cargando"
+  >
+    Consultando registro oficial...
   </div>
 
-  <div id="contenido" style="display:none;">
+
+  <!-- ERROR -->
+
+  <div
+    id="error"
+    class="error"
+  >
+
+    <strong>
+      No fue posible consultar el registro.
+    </strong>
+
+    <span id="mensajeError">
+      No fue posible consultar el sistema.
+    </span>
+
+  </div>
+
+
+  <!-- CONTENIDO -->
+
+  <div id="contenido">
+
+
+    <!-- ESTABLECIMIENTO -->
 
     <div class="tarjeta">
 
-      <div id="codigo" class="codigo"></div>
-      <div id="nombre" class="nombre"></div>
-      <div id="tipo" class="tipo"></div>
+      <div
+        id="codigo"
+        class="codigo"
+      >
+      </div>
 
-      <div id="estado" class="estado"></div>
+      <div
+        id="nombre"
+        class="nombre"
+      >
+      </div>
+
+      <div
+        id="tipo"
+        class="tipo"
+      >
+      </div>
+
+
+      <div
+        id="estadoServicio"
+        class="estado"
+      >
+      </div>
+
 
       <div class="grid">
 
         <div class="dato">
-          <span>Estado de pago</span>
-          <strong id="estadoPago"></strong>
+
+          <span class="etiqueta">
+            Estado de pago
+          </span>
+
+          <span
+            id="estadoPago"
+            class="valor"
+          >
+          </span>
+
         </div>
 
+
         <div class="dato">
-          <span>Próximo vencimiento</span>
-          <strong id="vencimiento"></strong>
+
+          <span class="etiqueta">
+            Próximo vencimiento
+          </span>
+
+          <span
+            id="vencimiento"
+            class="valor"
+          >
+          </span>
+
         </div>
 
       </div>
+
     </div>
 
 
+    <!-- SERVICIO -->
+
     <div class="tarjeta">
 
-      <div class="titulo-seccion">
+      <div class="tituloSeccion">
         Servicio de recolección
       </div>
 
+
       <div class="grid">
 
         <div class="dato">
-          <span>Días asignados</span>
-          <strong id="dias"></strong>
+
+          <span class="etiqueta">
+            Días asignados
+          </span>
+
+          <span
+            id="dias"
+            class="valor"
+          >
+          </span>
+
         </div>
 
-        <div class="dato">
-          <span>Frecuencia mensual</span>
-          <strong id="frecuencia"></strong>
-        </div>
 
         <div class="dato">
-          <span>Última recolección</span>
-          <strong id="ultima"></strong>
+
+          <span class="etiqueta">
+            Frecuencia mensual
+          </span>
+
+          <span
+            id="frecuencia"
+            class="valor"
+          >
+          </span>
+
         </div>
 
+
         <div class="dato">
-          <span>Próxima recolección</span>
-          <strong id="proxima"></strong>
+
+          <span class="etiqueta">
+            Última recolección
+          </span>
+
+          <span
+            id="ultima"
+            class="valor"
+          >
+          </span>
+
+        </div>
+
+
+        <div class="dato">
+
+          <span class="etiqueta">
+            Próxima recolección
+          </span>
+
+          <span
+            id="proxima"
+            class="valor"
+          >
+          </span>
+
         </div>
 
       </div>
+
     </div>
 
 
+    <!-- GENERACIÓN -->
+
     <div class="tarjeta">
 
-      <div class="titulo-seccion">
+      <div class="tituloSeccion">
         Generación registrada
       </div>
 
-      <div class="dato">
-        <span>Residuos registrados en el mes</span>
-        <strong id="kg"></strong>
+
+      <div class="kg">
+
+        <span class="etiqueta">
+          Residuos registrados en el mes
+        </span>
+
+        <span
+          id="kg"
+          class="valor"
+        >
+        </span>
+
       </div>
 
     </div>
@@ -240,12 +404,13 @@
   </div>
 
 
-  <div id="error" class="error" style="display:none;"></div>
-
-
   <div class="pie">
-    Registro oficial del Sistema Municipal RSH · UMIRS<br>
+
+    Registro oficial del Sistema Municipal RSH · UMIRS
+    <br>
+
     Municipalidad de Siguatepeque
+
   </div>
 
 </div>
@@ -253,161 +418,329 @@
 
 <script>
 
+/* =====================================================
+   API OFICIAL UMIRS
+===================================================== */
+
 const API_URL =
 "https://script.google.com/macros/s/AKfycbzGhT4qHhOKQDIjhs-KwgzSa3zUOLo_sbGvDHyFpmrmkBjrscbxO0VgUPtctGZSo1i3rg/exec";
 
 
-/* IDENTIFICAR ESTABLECIMIENTO */
+/* =====================================================
+   IDENTIFICAR ESTABLECIMIENTO
+===================================================== */
 
 const parametros =
-  new URLSearchParams(window.location.search);
+  new URLSearchParams(
+    window.location.search
+  );
+
 
 let codigo =
   parametros.get("codigo");
 
 
 /*
-  Mantiene funcionando el QR piloto actual.
+  Durante el piloto, si se abre
+  la página sin código usamos
+  San Gabriel.
 */
+
 if (!codigo) {
-  codigo = "RSH-2026-001";
+
+  codigo =
+    "RSH-2026-001";
+
 }
 
 
-/* CONSULTAR BASE CENTRAL */
+/* =====================================================
+   CONSULTAR BASE CENTRAL
+===================================================== */
 
 async function cargarDatos() {
 
+  const cargando =
+    document.getElementById(
+      "cargando"
+    );
+
+
+  const contenido =
+    document.getElementById(
+      "contenido"
+    );
+
+
+  const cajaError =
+    document.getElementById(
+      "error"
+    );
+
+
   try {
+
+    cargando.style.display =
+      "block";
+
+    contenido.style.display =
+      "none";
+
+    cajaError.style.display =
+      "none";
+
+
+    const url =
+      API_URL +
+      "?accion=consultar&codigo=" +
+      encodeURIComponent(codigo) +
+      "&t=" +
+      Date.now();
+
 
     const respuesta =
       await fetch(
-        API_URL +
-        "?codigo=" +
-        encodeURIComponent(codigo)
+        url,
+        {
+          method: "GET",
+          cache: "no-store"
+        }
       );
+
 
     if (!respuesta.ok) {
+
       throw new Error(
-        "No fue posible consultar el sistema."
+        "No fue posible conectar con la base central."
       );
+
     }
 
-    const datos =
-      await respuesta.json();
+
+    const texto =
+      await respuesta.text();
+
+
+    let datos;
+
+
+    try {
+
+      datos =
+        JSON.parse(texto);
+
+    } catch (e) {
+
+      throw new Error(
+        "La respuesta de la base central no es válida."
+      );
+
+    }
+
 
     if (!datos.ok) {
+
       throw new Error(
         datos.mensaje ||
         "Registro no encontrado."
       );
+
     }
+
 
     mostrarDatos(datos);
 
-  }
 
-  catch (error) {
+  } catch (error) {
 
-    document.getElementById("cargando")
-      .style.display = "none";
+    cargando.style.display =
+      "none";
 
-    const cajaError =
-      document.getElementById("error");
+    contenido.style.display =
+      "none";
 
-    cajaError.style.display = "block";
+    cajaError.style.display =
+      "block";
 
-    cajaError.innerHTML =
-      "<strong>No fue posible consultar el registro.</strong><br><br>" +
-      error.message;
+
+    document.getElementById(
+      "mensajeError"
+    ).textContent =
+      error.message ||
+      "No fue posible consultar el sistema.";
+
+
+    console.error(
+      "UMIRS RSH:",
+      error
+    );
 
   }
 
 }
 
 
-/* MOSTRAR INFORMACIÓN */
+/* =====================================================
+   MOSTRAR DATOS
+===================================================== */
 
-function mostrarDatos(d) {
+function mostrarDatos(datos) {
 
-  document.getElementById("codigo")
-    .textContent = d.codigo || "—";
-
-  document.getElementById("nombre")
-    .textContent = d.establecimiento || "—";
-
-  document.getElementById("tipo")
-    .textContent = d.tipo || "—";
-
-  document.getElementById("estadoPago")
-    .textContent = d.estadoPago || "—";
-
-  document.getElementById("vencimiento")
-    .textContent = d.proximoVencimiento || "—";
-
-  document.getElementById("dias")
-    .textContent = d.diasRecoleccion || "—";
-
-  document.getElementById("frecuencia")
-    .textContent =
-      d.frecuenciaMes
-      ? d.frecuenciaMes + " recolecciones/mes"
-      : "—";
-
-  document.getElementById("ultima")
-    .textContent = d.ultimaRecoleccion || "—";
-
-  document.getElementById("proxima")
-    .textContent = d.proximaRecoleccion || "—";
-
-  document.getElementById("kg")
-    .textContent =
-      d.kgMesActual !== undefined
-      ? d.kgMesActual + " kg"
-      : "0 kg";
+  document.getElementById(
+    "cargando"
+  ).style.display =
+    "none";
 
 
-  /* ESTADO DEL SERVICIO */
+  document.getElementById(
+    "error"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "contenido"
+  ).style.display =
+    "block";
+
+
+  /* CÓDIGO */
+
+  document.getElementById(
+    "codigo"
+  ).textContent =
+    datos.codigo || "-";
+
+
+  /* ESTABLECIMIENTO */
+
+  document.getElementById(
+    "nombre"
+  ).textContent =
+    datos.establecimiento || "-";
+
+
+  /* TIPO */
+
+  document.getElementById(
+    "tipo"
+  ).textContent =
+    datos.tipo || "-";
+
+
+  /* ESTADO SERVICIO */
 
   const estado =
-    document.getElementById("estado");
-
-  const activo =
-    String(d.estadoServicio || "")
-      .toUpperCase() === "ACTIVO";
+    String(
+      datos.estadoServicio || ""
+    ).toUpperCase();
 
 
-  if (activo) {
+  const cajaEstado =
+    document.getElementById(
+      "estadoServicio"
+    );
 
-    estado.className =
+
+  if (estado === "ACTIVO") {
+
+    cajaEstado.className =
       "estado activo";
 
-    estado.textContent =
+    cajaEstado.textContent =
       "🟢 SERVICIO ACTIVO";
 
-  }
+  } else {
 
-  else {
-
-    estado.className =
+    cajaEstado.className =
       "estado inactivo";
 
-    estado.textContent =
+    cajaEstado.textContent =
       "🔴 SERVICIO INACTIVO";
 
   }
 
 
-  document.getElementById("cargando")
-    .style.display = "none";
+  /* ESTADO DE PAGO */
 
-  document.getElementById("contenido")
-    .style.display = "block";
+  document.getElementById(
+    "estadoPago"
+  ).textContent =
+    datos.estadoPago || "-";
+
+
+  /* VENCIMIENTO */
+
+  document.getElementById(
+    "vencimiento"
+  ).textContent =
+    datos.proximoVencimiento || "-";
+
+
+  /* DÍAS */
+
+  document.getElementById(
+    "dias"
+  ).textContent =
+    datos.diasRecoleccion || "-";
+
+
+  /* FRECUENCIA */
+
+  const frecuencia =
+    datos.frecuenciaMes;
+
+
+  document.getElementById(
+    "frecuencia"
+  ).textContent =
+    frecuencia
+      ? frecuencia +
+        " recolecciones/mes"
+      : "-";
+
+
+  /* ÚLTIMA RECOLECCIÓN */
+
+  document.getElementById(
+    "ultima"
+  ).textContent =
+    datos.ultimaRecoleccion || "-";
+
+
+  /* PRÓXIMA RECOLECCIÓN */
+
+  document.getElementById(
+    "proxima"
+  ).textContent =
+    datos.proximaRecoleccion || "-";
+
+
+  /* KG MES */
+
+  const kg =
+    Number(
+      datos.kgMesActual || 0
+    );
+
+
+  document.getElementById(
+    "kg"
+  ).textContent =
+    kg.toLocaleString(
+      "es-HN",
+      {
+        maximumFractionDigits: 2
+      }
+    ) +
+    " kg";
 
 }
 
 
-/* INICIAR */
+/* =====================================================
+   INICIAR
+===================================================== */
 
 cargarDatos();
 
