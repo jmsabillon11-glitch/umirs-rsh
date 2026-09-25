@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +13,10 @@
 
     body {
       margin: 0;
-      padding: 20px;
+      padding: 22px;
       font-family: Arial, Helvetica, sans-serif;
       background: #f3f6f5;
-      color: #172033;
+      color: #14213d;
     }
 
     .contenedor {
@@ -32,55 +31,53 @@
 
     .encabezado h1 {
       margin: 0;
-      color: #08743f;
-      font-size: 26px;
+      color: #006b3c;
+      font-size: 25px;
     }
 
     .encabezado p {
-      margin: 5px 0;
-      color: #536b8a;
+      margin: 6px 0 0;
+      color: #536b8b;
       font-size: 14px;
     }
 
     .tarjeta {
       background: white;
-      border-radius: 20px;
+      border-radius: 18px;
       padding: 22px;
       margin-bottom: 16px;
-      box-shadow: 0 8px 25px rgba(0,0,0,.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
     }
 
     .codigo {
-      color: #536b8a;
-      font-size: 14px;
+      color: #536b8b;
       font-weight: bold;
-      margin-bottom: 5px;
+      font-size: 14px;
     }
 
     .nombre {
-      font-size: 26px;
+      font-size: 25px;
       font-weight: bold;
-      margin-bottom: 4px;
+      margin: 5px 0 4px;
     }
 
     .tipo {
       color: #64748b;
-      font-size: 16px;
       margin-bottom: 18px;
     }
 
     .estado {
-      padding: 16px;
-      border-radius: 13px;
-      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
       font-size: 18px;
       font-weight: bold;
+      text-align: center;
       margin-bottom: 18px;
     }
 
     .activo {
-      background: #d1fae5;
-      color: #066534;
+      background: #d7f7e2;
+      color: #006b3c;
     }
 
     .inactivo {
@@ -96,204 +93,163 @@
 
     .dato {
       background: #f7f9fb;
-      padding: 13px;
       border-radius: 12px;
+      padding: 13px;
       min-height: 64px;
     }
 
     .etiqueta {
       display: block;
-      color: #536b8a;
+      color: #536b8b;
       font-size: 12px;
       margin-bottom: 5px;
     }
 
     .valor {
-      display: block;
-      color: #081326;
-      font-size: 15px;
       font-weight: bold;
+      font-size: 15px;
+      color: #07152e;
     }
 
     .tituloSeccion {
-      color: #08743f;
-      font-size: 16px;
+      color: #006b3c;
       font-weight: bold;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      font-size: 16px;
     }
 
-    .kg {
+    .generacion {
       background: #f7f9fb;
-      padding: 15px;
+      padding: 14px;
       border-radius: 12px;
     }
 
-    .cargando {
+    .kg {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .acceso {
       text-align: center;
-      padding: 35px;
+    }
+
+    .acceso p {
       color: #64748b;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0 0 14px;
     }
 
-    .error {
-      display: none;
-      background: white;
-      border-radius: 20px;
-      padding: 28px;
-      text-align: center;
-      color: #b91c1c;
-      box-shadow: 0 8px 25px rgba(0,0,0,.08);
-    }
-
-    .error strong {
+    .botonAcceso {
       display: block;
-      margin-bottom: 15px;
+      width: 100%;
+      padding: 15px;
+      border-radius: 11px;
+      background: #176f49;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .botonAcceso:hover {
+      background: #115c3c;
     }
 
     .pie {
       text-align: center;
-      color: #8ca0c3;
+      color: #8aa0c0;
       font-size: 12px;
-      line-height: 18px;
-      margin-top: 18px;
+      line-height: 1.5;
+      margin-top: 20px;
     }
 
-    #contenido {
-      display: none;
+    .cargando {
+      text-align: center;
+      padding: 30px;
+      color: #64748b;
     }
 
-    @media(max-width: 480px) {
+    .error {
+      color: #b00000;
+      text-align: center;
+      font-weight: bold;
+    }
 
+    @media (max-width: 420px) {
       body {
         padding: 14px;
       }
 
-      .tarjeta {
-        padding: 18px;
+      .grid {
+        grid-template-columns: 1fr;
       }
 
       .nombre {
         font-size: 23px;
       }
-
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
     }
   </style>
 </head>
-
 
 <body>
 
 <div class="contenedor">
 
   <div class="encabezado">
-
     <h1>UMIRS</h1>
-
     <p>Municipalidad de Siguatepeque</p>
-
     <p>
-      Sistema Municipal de Recolección
-      de Residuos Hospitalarios
+      Sistema Municipal de Recolección de Residuos Hospitalarios
     </p>
-
   </div>
 
 
   <!-- CARGANDO -->
 
-  <div
-    id="cargando"
-    class="tarjeta cargando"
-  >
-    Consultando registro oficial...
+  <div id="cargando" class="tarjeta cargando">
+    Consultando registro...
   </div>
 
 
   <!-- ERROR -->
 
-  <div
-    id="error"
-    class="error"
-  >
-
-    <strong>
-      No fue posible consultar el registro.
-    </strong>
-
-    <span id="mensajeError">
-      No fue posible consultar el sistema.
-    </span>
-
+  <div id="error" class="tarjeta error" style="display:none;">
+    No fue posible consultar el registro.
   </div>
 
 
   <!-- CONTENIDO -->
 
-  <div id="contenido">
-
-
-    <!-- ESTABLECIMIENTO -->
+  <div id="contenido" style="display:none;">
 
     <div class="tarjeta">
 
-      <div
-        id="codigo"
-        class="codigo"
-      >
-      </div>
+      <div id="codigo" class="codigo"></div>
 
-      <div
-        id="nombre"
-        class="nombre"
-      >
-      </div>
+      <div id="establecimiento" class="nombre"></div>
 
-      <div
-        id="tipo"
-        class="tipo"
-      >
-      </div>
+      <div id="tipo" class="tipo"></div>
 
-
-      <div
-        id="estadoServicio"
-        class="estado"
-      >
-      </div>
-
+      <div id="estadoServicio" class="estado"></div>
 
       <div class="grid">
 
         <div class="dato">
-
           <span class="etiqueta">
             Estado de pago
           </span>
 
-          <span
-            id="estadoPago"
-            class="valor"
-          >
-          </span>
-
+          <div id="estadoPago" class="valor"></div>
         </div>
 
-
         <div class="dato">
-
           <span class="etiqueta">
             Próximo vencimiento
           </span>
 
-          <span
-            id="vencimiento"
-            class="valor"
-          >
-          </span>
-
+          <div id="vencimiento" class="valor"></div>
         </div>
 
       </div>
@@ -309,66 +265,38 @@
         Servicio de recolección
       </div>
 
-
       <div class="grid">
 
         <div class="dato">
-
           <span class="etiqueta">
             Días asignados
           </span>
 
-          <span
-            id="dias"
-            class="valor"
-          >
-          </span>
-
+          <div id="dias" class="valor"></div>
         </div>
 
-
         <div class="dato">
-
           <span class="etiqueta">
             Frecuencia mensual
           </span>
 
-          <span
-            id="frecuencia"
-            class="valor"
-          >
-          </span>
-
+          <div id="frecuencia" class="valor"></div>
         </div>
 
-
         <div class="dato">
-
           <span class="etiqueta">
             Última recolección
           </span>
 
-          <span
-            id="ultima"
-            class="valor"
-          >
-          </span>
-
+          <div id="ultima" class="valor"></div>
         </div>
 
-
         <div class="dato">
-
           <span class="etiqueta">
             Próxima recolección
           </span>
 
-          <span
-            id="proxima"
-            class="valor"
-          >
-          </span>
-
+          <div id="proxima" class="valor"></div>
         </div>
 
       </div>
@@ -384,20 +312,41 @@
         Generación registrada
       </div>
 
-
-      <div class="kg">
+      <div class="generacion">
 
         <span class="etiqueta">
           Residuos registrados en el mes
         </span>
 
-        <span
-          id="kg"
-          class="valor"
-        >
-        </span>
+        <div id="kg" class="kg">
+          0 kg
+        </div>
 
       </div>
+
+    </div>
+
+
+    <!-- ACCESO PERSONAL -->
+
+    <div class="tarjeta acceso">
+
+      <div class="tituloSeccion">
+        Personal autorizado UMIRS
+      </div>
+
+      <p>
+        Acceso exclusivo para personal autorizado
+        encargado del registro de recolecciones.
+      </p>
+
+      <a
+        id="botonChofer"
+        class="botonAcceso"
+        href="#"
+      >
+        🔐 ACCESO PERSONAL UMIRS
+      </a>
 
     </div>
 
@@ -405,12 +354,9 @@
 
 
   <div class="pie">
-
     Registro oficial del Sistema Municipal RSH · UMIRS
     <br>
-
     Municipalidad de Siguatepeque
-
   </div>
 
 </div>
@@ -418,331 +364,236 @@
 
 <script>
 
-/* =====================================================
-   API OFICIAL UMIRS
-===================================================== */
+  /* ==================================================
+     API UMIRS
+  ================================================== */
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbzGhT4qHhOKQDIjhs-KwgzSa3zUOLo_sbGvDHyFpmrmkBjrscbxO0VgUPtctGZSo1i3rg/exec";
-
-
-/* =====================================================
-   IDENTIFICAR ESTABLECIMIENTO
-===================================================== */
-
-const parametros =
-  new URLSearchParams(
-    window.location.search
-  );
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbzGhT4qHhOKQDIjhs-KwgzSa3zUOLo_sbGvDHyFpmrmkBjrscbxO0VgUPtctGZSo1i3rg/exec";
 
 
-let codigo =
-  parametros.get("codigo");
+  /* ==================================================
+     IDENTIFICAR RSH
+  ================================================== */
 
+  const parametros =
+    new URLSearchParams(
+      window.location.search
+    );
 
-/*
-  Durante el piloto, si se abre
-  la página sin código usamos
-  San Gabriel.
-*/
+  let codigo =
+    parametros.get("codigo");
 
-if (!codigo) {
+  if (!codigo) {
+    codigo = "RSH-2026-001";
+  }
 
   codigo =
-    "RSH-2026-001";
-
-}
+    codigo.trim().toUpperCase();
 
 
-/* =====================================================
-   CONSULTAR BASE CENTRAL
-===================================================== */
+  /* ==================================================
+     ACCESO PERSONAL
+  ================================================== */
 
-async function cargarDatos() {
+  const URL_CHOFER =
+    API_URL +
+    "?vista=chofer&codigo=" +
+    encodeURIComponent(codigo);
 
-  const cargando =
-    document.getElementById(
-      "cargando"
-    );
-
-
-  const contenido =
-    document.getElementById(
-      "contenido"
-    );
+  document
+    .getElementById("botonChofer")
+    .href = URL_CHOFER;
 
 
-  const cajaError =
-    document.getElementById(
-      "error"
-    );
+  /* ==================================================
+     CONSULTAR BASE CENTRAL
+  ================================================== */
 
-
-  try {
-
-    cargando.style.display =
-      "block";
-
-    contenido.style.display =
-      "none";
-
-    cajaError.style.display =
-      "none";
-
-
-    const url =
-      API_URL +
-      "?accion=consultar&codigo=" +
-      encodeURIComponent(codigo) +
-      "&t=" +
-      Date.now();
-
-
-    const respuesta =
-      await fetch(
-        url,
-        {
-          method: "GET",
-          cache: "no-store"
-        }
-      );
-
-
-    if (!respuesta.ok) {
-
-      throw new Error(
-        "No fue posible conectar con la base central."
-      );
-
-    }
-
-
-    const texto =
-      await respuesta.text();
-
-
-    let datos;
-
+  async function cargarDatos() {
 
     try {
 
-      datos =
-        JSON.parse(texto);
-
-    } catch (e) {
-
-      throw new Error(
-        "La respuesta de la base central no es válida."
-      );
-
-    }
-
-
-    if (!datos.ok) {
-
-      throw new Error(
-        datos.mensaje ||
-        "Registro no encontrado."
-      );
-
-    }
-
-
-    mostrarDatos(datos);
-
-
-  } catch (error) {
-
-    cargando.style.display =
-      "none";
-
-    contenido.style.display =
-      "none";
-
-    cajaError.style.display =
-      "block";
-
-
-    document.getElementById(
-      "mensajeError"
-    ).textContent =
-      error.message ||
-      "No fue posible consultar el sistema.";
-
-
-    console.error(
-      "UMIRS RSH:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   MOSTRAR DATOS
-===================================================== */
-
-function mostrarDatos(datos) {
-
-  document.getElementById(
-    "cargando"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "error"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "contenido"
-  ).style.display =
-    "block";
-
-
-  /* CÓDIGO */
-
-  document.getElementById(
-    "codigo"
-  ).textContent =
-    datos.codigo || "-";
-
-
-  /* ESTABLECIMIENTO */
-
-  document.getElementById(
-    "nombre"
-  ).textContent =
-    datos.establecimiento || "-";
-
-
-  /* TIPO */
-
-  document.getElementById(
-    "tipo"
-  ).textContent =
-    datos.tipo || "-";
-
-
-  /* ESTADO SERVICIO */
-
-  const estado =
-    String(
-      datos.estadoServicio || ""
-    ).toUpperCase();
-
-
-  const cajaEstado =
-    document.getElementById(
-      "estadoServicio"
-    );
-
-
-  if (estado === "ACTIVO") {
-
-    cajaEstado.className =
-      "estado activo";
-
-    cajaEstado.textContent =
-      "🟢 SERVICIO ACTIVO";
-
-  } else {
-
-    cajaEstado.className =
-      "estado inactivo";
-
-    cajaEstado.textContent =
-      "🔴 SERVICIO INACTIVO";
-
-  }
-
-
-  /* ESTADO DE PAGO */
-
-  document.getElementById(
-    "estadoPago"
-  ).textContent =
-    datos.estadoPago || "-";
-
-
-  /* VENCIMIENTO */
-
-  document.getElementById(
-    "vencimiento"
-  ).textContent =
-    datos.proximoVencimiento || "-";
-
-
-  /* DÍAS */
-
-  document.getElementById(
-    "dias"
-  ).textContent =
-    datos.diasRecoleccion || "-";
-
-
-  /* FRECUENCIA */
-
-  const frecuencia =
-    datos.frecuenciaMes;
-
-
-  document.getElementById(
-    "frecuencia"
-  ).textContent =
-    frecuencia
-      ? frecuencia +
-        " recolecciones/mes"
-      : "-";
-
-
-  /* ÚLTIMA RECOLECCIÓN */
-
-  document.getElementById(
-    "ultima"
-  ).textContent =
-    datos.ultimaRecoleccion || "-";
-
-
-  /* PRÓXIMA RECOLECCIÓN */
-
-  document.getElementById(
-    "proxima"
-  ).textContent =
-    datos.proximaRecoleccion || "-";
-
-
-  /* KG MES */
-
-  const kg =
-    Number(
-      datos.kgMesActual || 0
-    );
-
-
-  document.getElementById(
-    "kg"
-  ).textContent =
-    kg.toLocaleString(
-      "es-HN",
-      {
-        maximumFractionDigits: 2
+      const url =
+        API_URL +
+        "?accion=consultar&codigo=" +
+        encodeURIComponent(codigo) +
+        "&t=" +
+        Date.now();
+
+      const respuesta =
+        await fetch(
+          url,
+          {
+            method: "GET",
+            cache: "no-store"
+          }
+        );
+
+      if (!respuesta.ok) {
+        throw new Error(
+          "No fue posible consultar el sistema."
+        );
       }
-    ) +
-    " kg";
 
-}
+      const datos =
+        await respuesta.json();
+
+      if (!datos.ok) {
+        throw new Error(
+          datos.mensaje ||
+          "Registro no encontrado."
+        );
+      }
+
+      mostrarDatos(datos);
+
+    } catch (error) {
+
+      console.error(error);
+
+      document
+        .getElementById("cargando")
+        .style.display = "none";
+
+      const cajaError =
+        document.getElementById("error");
+
+      cajaError.style.display = "block";
+
+      cajaError.innerHTML =
+        "No fue posible consultar el registro.<br><br>" +
+        "<span style='font-weight:normal'>" +
+        error.message +
+        "</span>";
+    }
+  }
 
 
-/* =====================================================
-   INICIAR
-===================================================== */
+  /* ==================================================
+     MOSTRAR INFORMACIÓN
+  ================================================== */
 
-cargarDatos();
+  function mostrarDatos(datos) {
+
+    document
+      .getElementById("codigo")
+      .textContent =
+        datos.codigo || codigo;
+
+    document
+      .getElementById("establecimiento")
+      .textContent =
+        datos.establecimiento || "-";
+
+    document
+      .getElementById("tipo")
+      .textContent =
+        datos.tipo || "-";
+
+
+    /* ESTADO */
+
+    const estado =
+      document.getElementById(
+        "estadoServicio"
+      );
+
+    const activo =
+      String(
+        datos.estadoServicio || ""
+      )
+        .trim()
+        .toUpperCase() === "ACTIVO";
+
+    if (activo) {
+
+      estado.className =
+        "estado activo";
+
+      estado.textContent =
+        "🟢 SERVICIO ACTIVO";
+
+    } else {
+
+      estado.className =
+        "estado inactivo";
+
+      estado.textContent =
+        "🔴 SERVICIO INACTIVO";
+    }
+
+
+    /* PAGO */
+
+    document
+      .getElementById("estadoPago")
+      .textContent =
+        datos.estadoPago || "-";
+
+    document
+      .getElementById("vencimiento")
+      .textContent =
+        datos.proximoVencimiento || "-";
+
+
+    /* SERVICIO */
+
+    document
+      .getElementById("dias")
+      .textContent =
+        datos.diasRecoleccion || "-";
+
+    document
+      .getElementById("frecuencia")
+      .textContent =
+        datos.frecuenciaMes
+          ? datos.frecuenciaMes +
+            " recolecciones/mes"
+          : "-";
+
+    document
+      .getElementById("ultima")
+      .textContent =
+        datos.ultimaRecoleccion || "-";
+
+    document
+      .getElementById("proxima")
+      .textContent =
+        datos.proximaRecoleccion || "-";
+
+
+    /* KG */
+
+    const kg =
+      Number(
+        datos.kgMesActual || 0
+      );
+
+    document
+      .getElementById("kg")
+      .textContent =
+        kg.toFixed(
+          Number.isInteger(kg)
+            ? 0
+            : 1
+        ) +
+        " kg";
+
+
+    /* MOSTRAR */
+
+    document
+      .getElementById("cargando")
+      .style.display = "none";
+
+    document
+      .getElementById("contenido")
+      .style.display = "block";
+  }
+
+
+  cargarDatos();
 
 </script>
 
