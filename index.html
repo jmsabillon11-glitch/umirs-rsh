@@ -1,76 +1,393 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RSH-2026-001 | UMIRS Siguatepeque</title>
-<style>
-:root{--green:#18794e;--green2:#e9f6ef;--blue:#175b8c;--ink:#17313f;--muted:#61727c;--line:#dce6e9;--bg:#f4f8f7}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
-.wrap{max-width:720px;margin:auto;padding:18px}
-.hero{background:linear-gradient(135deg,#175b8c,#18794e);color:white;border-radius:22px;padding:24px;box-shadow:0 10px 30px #17313f22}
-.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
-h1{font-size:25px;margin:8px 0 3px}.sub{margin:0;opacity:.9;font-size:14px}
-.card{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:14px;box-shadow:0 5px 18px #17313f0d}
-.statusrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.status{border-radius:14px;padding:14px;background:var(--green2);border:1px solid #bfe3cf}
-.status small{display:block;color:var(--muted);margin-bottom:5px}.status strong{color:var(--green);font-size:18px}
-.code{display:inline-block;margin-top:14px;background:#ffffff24;border:1px solid #ffffff55;border-radius:999px;padding:7px 12px;font-weight:700}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.item{padding:12px;border:1px solid var(--line);border-radius:13px}
-.item small{display:block;color:var(--muted);margin-bottom:5px}.item b{font-size:15px}
-h2{font-size:18px;margin:0 0 12px}
-table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px 7px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:12px}
-.note{font-size:12px;color:var(--muted);line-height:1.5;text-align:center;padding:16px}
-.badge{font-size:12px;font-weight:bold;color:var(--green);background:var(--green2);padding:5px 8px;border-radius:999px}
-@media(max-width:520px){.wrap{padding:12px}.hero{padding:20px}.statusrow,.grid{grid-template-columns:1fr}h1{font-size:22px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UMIRS | Sistema RSH</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f6f5;
+      color: #1f2937;
+    }
+
+    .contenedor {
+      max-width: 520px;
+      margin: auto;
+    }
+
+    .encabezado {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .encabezado h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #176b45;
+    }
+
+    .encabezado p {
+      margin: 6px 0 0;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .tarjeta {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.08);
+      margin-bottom: 15px;
+    }
+
+    .codigo {
+      font-size: 14px;
+      color: #64748b;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .nombre {
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .tipo {
+      color: #64748b;
+      margin-bottom: 18px;
+    }
+
+    .estado {
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .activo {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .inactivo {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .dato {
+      background: #f8fafc;
+      padding: 13px;
+      border-radius: 12px;
+    }
+
+    .dato span {
+      display: block;
+      color: #64748b;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .dato strong {
+      font-size: 15px;
+    }
+
+    .titulo-seccion {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #176b45;
+    }
+
+    .cargando, .error {
+      text-align: center;
+      padding: 30px;
+      background: white;
+      border-radius: 18px;
+    }
+
+    .error {
+      color: #991b1b;
+    }
+
+    .pie {
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 18px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 12px; }
+      .grid { grid-template-columns: 1fr; }
+      .nombre { font-size: 22px; }
+    }
+  </style>
 </head>
+
 <body>
-<main class="wrap">
-<section class="hero">
-<div class="kicker">Municipalidad de Siguatepeque · UMIRS</div>
-<h1>Sistema Municipal de Recolección de Residuos Hospitalarios</h1>
-<p class="sub">Ficha pública de verificación del establecimiento</p>
-<div class="code">RSH-2026-001</div>
-</section>
 
-<section class="card">
-<h2>Hospital San Gabriel</h2>
-<div class="statusrow">
-<div class="status"><small>Estado del servicio</small><strong>● VIGENTE</strong></div>
-<div class="status"><small>Estado de pago</small><strong>● AL DÍA</strong></div>
+<div class="contenedor">
+
+  <div class="encabezado">
+    <h1>UMIRS</h1>
+    <p>Municipalidad de Siguatepeque</p>
+    <p>Sistema Municipal de Recolección de Residuos Hospitalarios</p>
+  </div>
+
+  <div id="cargando" class="cargando">
+    Consultando registro municipal...
+  </div>
+
+  <div id="contenido" style="display:none;">
+
+    <div class="tarjeta">
+
+      <div id="codigo" class="codigo"></div>
+      <div id="nombre" class="nombre"></div>
+      <div id="tipo" class="tipo"></div>
+
+      <div id="estado" class="estado"></div>
+
+      <div class="grid">
+
+        <div class="dato">
+          <span>Estado de pago</span>
+          <strong id="estadoPago"></strong>
+        </div>
+
+        <div class="dato">
+          <span>Próximo vencimiento</span>
+          <strong id="vencimiento"></strong>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="tarjeta">
+
+      <div class="titulo-seccion">
+        Servicio de recolección
+      </div>
+
+      <div class="grid">
+
+        <div class="dato">
+          <span>Días asignados</span>
+          <strong id="dias"></strong>
+        </div>
+
+        <div class="dato">
+          <span>Frecuencia mensual</span>
+          <strong id="frecuencia"></strong>
+        </div>
+
+        <div class="dato">
+          <span>Última recolección</span>
+          <strong id="ultima"></strong>
+        </div>
+
+        <div class="dato">
+          <span>Próxima recolección</span>
+          <strong id="proxima"></strong>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="tarjeta">
+
+      <div class="titulo-seccion">
+        Generación registrada
+      </div>
+
+      <div class="dato">
+        <span>Residuos registrados en el mes</span>
+        <strong id="kg"></strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div id="error" class="error" style="display:none;"></div>
+
+
+  <div class="pie">
+    Registro oficial del Sistema Municipal RSH · UMIRS<br>
+    Municipalidad de Siguatepeque
+  </div>
+
 </div>
-</section>
 
-<section class="card">
-<h2>Información del servicio</h2>
-<div class="grid">
-<div class="item"><small>Días de recolección</small><b>Martes y viernes</b></div>
-<div class="item"><small>Frecuencia autorizada</small><b>8 recolecciones/mes</b></div>
-<div class="item"><small>Generación del mes</small><b>42.5 kg</b></div>
-<div class="item"><small>Última recolección</small><b>22/09/2026</b></div>
-<div class="item"><small>Próxima recolección</small><b>25/09/2026</b></div>
-<div class="item"><small>Próximo vencimiento</small><b>05/10/2026</b></div>
-<div class="item"><small>Último pago registrado</small><b>05/09/2026</b></div>
-<div class="item"><small>Identificación</small><b>RSH-2026-001</b></div>
-</div>
-</section>
 
-<section class="card">
-<h2>Historial reciente de recolecciones</h2>
-<table>
-<thead><tr><th>Fecha</th><th>Peso neto</th><th>Estado</th></tr></thead>
-<tbody>
-<tr><td>22/09/2026</td><td>18.5 kg</td><td><span class="badge">REALIZADA</span></td></tr>
-<tr><td>18/09/2026</td><td>15.2 kg</td><td><span class="badge">REALIZADA</span></td></tr>
-</tbody>
-</table>
-</section>
+<script>
 
-<div class="note">
-Esta ficha corresponde al piloto del Sistema Municipal de Recolección de Residuos Hospitalarios de UMIRS, Municipalidad de Siguatepeque.<br>
-La información mostrada es demostrativa para validación del sistema.
-</div>
-</main>
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzff_Ywo93wmRei_FPvwnS6f7_QWpITHxuDQW5u35THMjzU_6sS-D7tqweZaa3xRwCxzA/exec";
+
+
+/* --------------------------------------------------
+   IDENTIFICAR ESTABLECIMIENTO
+-------------------------------------------------- */
+
+const parametros = new URLSearchParams(window.location.search);
+
+let codigo = parametros.get("codigo");
+
+/*
+   Mantiene funcionando nuestro QR piloto actual,
+   que todavía abre la página sin ?codigo=
+*/
+if (!codigo) {
+  codigo = "RSH-2026-001";
+}
+
+
+/* --------------------------------------------------
+   CONSULTAR GOOGLE SHEETS
+-------------------------------------------------- */
+
+async function cargarDatos() {
+
+  try {
+
+    const respuesta =
+      await fetch(API_URL + "?codigo=" + encodeURIComponent(codigo));
+
+    if (!respuesta.ok) {
+      throw new Error("No fue posible consultar el sistema.");
+    }
+
+    const datos = await respuesta.json();
+
+    if (!datos.ok) {
+      throw new Error(
+        datos.mensaje || "Registro no encontrado."
+      );
+    }
+
+    mostrarDatos(datos);
+
+  }
+
+  catch (error) {
+
+    document.getElementById("cargando").style.display = "none";
+
+    const cajaError = document.getElementById("error");
+
+    cajaError.style.display = "block";
+
+    cajaError.innerHTML =
+      "<strong>No fue posible consultar el registro.</strong><br><br>" +
+      error.message;
+
+  }
+
+}
+
+
+/* --------------------------------------------------
+   MOSTRAR INFORMACIÓN
+-------------------------------------------------- */
+
+function mostrarDatos(d) {
+
+  document.getElementById("codigo").textContent =
+    d.codigo || "—";
+
+  document.getElementById("nombre").textContent =
+    d.establecimiento || "—";
+
+  document.getElementById("tipo").textContent =
+    d.tipo || "—";
+
+  document.getElementById("estadoPago").textContent =
+    d.estadoPago || "—";
+
+  document.getElementById("vencimiento").textContent =
+    d.proximoVencimiento || "—";
+
+  document.getElementById("dias").textContent =
+    d.diasRecoleccion || "—";
+
+  document.getElementById("frecuencia").textContent =
+    d.frecuenciaMes
+      ? d.frecuenciaMes + " recolecciones/mes"
+      : "—";
+
+  document.getElementById("ultima").textContent =
+    d.ultimaRecoleccion || "—";
+
+  document.getElementById("proxima").textContent =
+    d.proximaRecoleccion || "—";
+
+  document.getElementById("kg").textContent =
+    d.kgMesActual
+      ? d.kgMesActual + " kg"
+      : "0 kg";
+
+
+  /* ESTADO VERDE / ROJO */
+
+  const estado =
+    document.getElementById("estado");
+
+  const activo =
+    String(d.estadoServicio)
+      .toUpperCase() === "ACTIVO";
+
+  if (activo) {
+
+    estado.className = "estado activo";
+
+    estado.textContent =
+      "🟢 SERVICIO ACTIVO";
+
+  } else {
+
+    estado.className = "estado inactivo";
+
+    estado.textContent =
+      "🔴 SERVICIO INACTIVO";
+
+  }
+
+
+  document.getElementById("cargando").style.display =
+    "none";
+
+  document.getElementById("contenido").style.display =
+    "block";
+
+}
+
+
+/* INICIAR */
+
+cargarDatos();
+
+</script>
+
 </body>
 </html>
