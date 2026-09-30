@@ -275,7 +275,58 @@
 
 
   <!-- CARGANDO -->
+<!-- CONSULTA RSH -->
 
+<div id="consultaRSH" class="tarjeta" style="display:none; text-align:center;">
+
+  <div class="tituloSeccion">
+    Consulta de establecimiento RSH
+  </div>
+
+  <p style="color:#536b8b; margin-bottom:18px;">
+    Ingrese el código de registro asignado por UMIRS
+  </p>
+
+  <input
+    id="codigoConsulta"
+    type="text"
+    placeholder="Ej. RSH-2026-001"
+    autocomplete="off"
+    style="
+      width:100%;
+      padding:15px;
+      border:1px solid #d7dee8;
+      border-radius:12px;
+      font-size:17px;
+      text-align:center;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    "
+  >
+
+  <button
+    id="botonConsultar"
+    type="button"
+    style="
+      width:100%;
+      padding:15px;
+      border:0;
+      border-radius:12px;
+      background:#08783f;
+      color:white;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+    "
+  >
+    CONSULTAR ESTABLECIMIENTO
+  </button>
+
+  <div style="margin-top:15px; font-size:13px; color:#6b7280;">
+    Sistema Municipal de Recolección de Residuos Hospitalarios
+  </div>
+
+</div>
   <div id="cargando" class="tarjeta cargando">
     Consultando registro...
   </div>
@@ -515,20 +566,19 @@
       window.location.search
     );
 
-  let codigo =
-    parametros.get("codigo");
+ let codigo =
+  parametros.get("codigo");
 
-  if (!codigo) {
-    codigo = "RSH-2026-001";
-  }
-
-  codigo =
-    codigo.trim().toUpperCase();
+if (codigo) {
+  codigo = codigo.trim().toUpperCase();
+}
 
 
   /* ==================================================
      ACCESO PERSONAL
   ================================================== */
+
+  if (codigo) {
 
   const URL_CHOFER =
     API_URL +
@@ -538,6 +588,8 @@
   document
     .getElementById("botonChofer")
     .href = URL_CHOFER;
+
+}
 
 
   /* ==================================================
@@ -797,7 +849,80 @@ if (estadoPagoFinanciero === "PENDIENTE") {
   }
 
 
+/* ==========================================
+   INICIO DEL PORTAL RSH
+========================================== */
+
+function abrirConsultaRSH() {
+
+  const codigoIngresado =
+    document
+      .getElementById("codigoConsulta")
+      .value
+      .trim()
+      .toUpperCase();
+
+  if (!codigoIngresado) {
+    alert("Ingrese su Código RSH.");
+    return;
+  }
+
+  window.location.href =
+    window.location.pathname +
+    "?codigo=" +
+    encodeURIComponent(codigoIngresado);
+}
+
+
+/* BOTÓN CONSULTAR */
+
+document
+  .getElementById("botonConsultar")
+  .addEventListener("click", abrirConsultaRSH);
+
+
+/* PERMITIR CONSULTAR CON ENTER */
+
+document
+  .getElementById("codigoConsulta")
+  .addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+      abrirConsultaRSH();
+    }
+
+  });
+
+
+/* DECIDIR QUÉ MOSTRAR */
+
+if (codigo) {
+
+  document
+    .getElementById("consultaRSH")
+    .style.display = "none";
+
   cargarDatos();
+
+} else {
+
+  document
+    .getElementById("cargando")
+    .style.display = "none";
+
+  document
+    .getElementById("contenido")
+    .style.display = "none";
+
+  document
+    .getElementById("error")
+    .style.display = "none";
+
+  document
+    .getElementById("consultaRSH")
+    .style.display = "block";
+
+}
 
 </script>
 
