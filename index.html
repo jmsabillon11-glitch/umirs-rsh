@@ -28,7 +28,55 @@
       text-align: center;
       margin-bottom: 20px;
     }
+.logosInstitucionales {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  width: 100%;
+}
 
+.logosInstitucionales img {
+  display: block;
+  object-fit: contain;
+}
+
+.logoMuni {
+  width: 38%;
+  max-width: 180px;
+  height: auto;
+}
+
+.logoSigua {
+  width: 24%;
+  max-width: 105px;
+  height: auto;
+}
+
+.logoUmirs {
+  width: 30%;
+  max-width: 145px;
+  height: auto;
+}
+
+@media (max-width: 480px) {
+  .logosInstitucionales {
+    gap: 8px;
+  }
+
+  .logoMuni {
+    width: 38%;
+  }
+
+  .logoSigua {
+    width: 24%;
+  }
+
+  .logoUmirs {
+    width: 30%;
+  }
+}
     .encabezado h1 {
       margin: 0;
       color: #006b3c;
@@ -197,13 +245,23 @@
 
 <div class="contenedor">
 
-  <div class="encabezado">
-    <h1>UMIRS</h1>
-    <p>Municipalidad de Siguatepeque</p>
-    <p>
-      Sistema Municipal de Recolección de Residuos Hospitalarios
-    </p>
+<div class="encabezado">
+
+  <div class="logosInstitucionales">
+    <img src="LOGO MUNI_2.jpg" alt="Alcaldía Municipal de Siguatepeque" class="logoMuni">
+    <img src="marca ciudad-1(5).png" alt="SIGUA - El corazón de Honduras" class="logoSigua">
+    <img src="LOGO UMIRS_1(2).jpg" alt="UMIRS" class="logoUmirs">
   </div>
+
+  <h1>UMIRS</h1>
+
+  <p>Municipalidad de Siguatepeque</p>
+
+  <p>
+    Sistema Municipal de Recolección de Residuos Hospitalarios
+  </p>
+
+</div>
 
 
   <!-- CARGANDO -->
