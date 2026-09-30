@@ -325,7 +325,73 @@
       </div>
 
     </div>
+<!-- ESTADO FINANCIERO -->
 
+<div class="tarjeta">
+
+  <div class="tituloSeccion">
+    Estado financiero
+  </div>
+
+  <div class="dato">
+    <span class="etiqueta">
+      Estado de pago
+    </span>
+    <div id="estadoPagoFinanciero" class="valor">
+      —
+    </div>
+  </div>
+
+  <div class="dato">
+    <span class="etiqueta">
+      Último período pagado
+    </span>
+    <div id="ultimoPeriodoPagado" class="valor">
+      —
+    </div>
+  </div>
+
+  <div class="dato">
+    <span class="etiqueta">
+      Último pago
+    </span>
+    <div id="ultimoPago" class="valor">
+      —
+    </div>
+  </div>
+
+  <div id="bloquePendiente">
+
+    <div class="dato">
+      <span class="etiqueta">
+        Período pendiente
+      </span>
+      <div id="periodoPendiente" class="valor">
+        —
+      </div>
+    </div>
+
+    <div class="dato">
+      <span class="etiqueta">
+        Factura pendiente
+      </span>
+      <div id="facturaPendiente" class="valor">
+        —
+      </div>
+    </div>
+
+    <div class="dato">
+      <span class="etiqueta">
+        Monto pendiente
+      </span>
+      <div id="montoPendiente" class="valor">
+        L 0.00
+      </div>
+    </div>
+
+  </div>
+
+</div>
 
     <!-- ACCESO PERSONAL -->
 
@@ -580,7 +646,60 @@
         ) +
         " kg";
 
+/* ESTADO FINANCIERO */
 
+const estadoPagoFinanciero =
+  String(datos.estadoPago || "").trim().toUpperCase();
+
+document
+  .getElementById("estadoPagoFinanciero")
+  .textContent =
+    estadoPagoFinanciero || "SIN INFORMACIÓN";
+
+document
+  .getElementById("ultimoPeriodoPagado")
+  .textContent =
+    datos.ultimoPeriodoPagado || "—";
+
+document
+  .getElementById("ultimoPago")
+  .textContent =
+    datos.ultimoPago
+      ? new Date(datos.ultimoPago).toLocaleDateString("es-HN")
+      : "—";
+
+const bloquePendiente =
+  document.getElementById("bloquePendiente");
+
+if (estadoPagoFinanciero === "PENDIENTE") {
+
+  bloquePendiente.style.display = "block";
+
+  document
+    .getElementById("periodoPendiente")
+    .textContent =
+      datos.periodoPendiente || "—";
+
+  document
+    .getElementById("facturaPendiente")
+    .textContent =
+      datos.facturaPendiente || "—";
+
+  document
+    .getElementById("montoPendiente")
+    .textContent =
+      "L " +
+      Number(datos.montoPendiente || 0)
+        .toLocaleString("es-HN", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+
+} else {
+
+  bloquePendiente.style.display = "none";
+
+}
     /* MOSTRAR */
 
     document
