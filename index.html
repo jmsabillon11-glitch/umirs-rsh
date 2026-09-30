@@ -651,11 +651,28 @@
 const estadoPagoFinanciero =
   String(datos.estadoPago || "").trim().toUpperCase();
 
-document
-  .getElementById("estadoPagoFinanciero")
-  .textContent =
-    estadoPagoFinanciero || "SIN INFORMACIÓN";
+const estadoPagoElemento =
+  document.getElementById("estadoPagoFinanciero");
 
+if (estadoPagoFinanciero === "AL DIA") {
+
+  estadoPagoElemento.textContent = "🟢 AL DÍA";
+  estadoPagoElemento.style.color = "#08783e";
+  estadoPagoElemento.style.fontWeight = "700";
+
+} else if (estadoPagoFinanciero === "PENDIENTE") {
+
+  estadoPagoElemento.textContent = "🔴 PENDIENTE";
+  estadoPagoElemento.style.color = "#c62828";
+  estadoPagoElemento.style.fontWeight = "700";
+
+} else {
+
+  estadoPagoElemento.textContent = "⚪ SIN INFORMACIÓN";
+  estadoPagoElemento.style.color = "#6b7280";
+  estadoPagoElemento.style.fontWeight = "700";
+
+}
 document
   .getElementById("ultimoPeriodoPagado")
   .textContent =
