@@ -1,0 +1,11 @@
+{
+  "name": "UMIRS - Sistema Municipal RSH",
+  "short_name": "UMIRS RSH",
+  "description": "Sistema Municipal de Recolección de Residuos Hospitalarios de Siguatepeque",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f6f5",
+  "theme_color": "#08783f",
+  "lang": "es-HN"
+}
