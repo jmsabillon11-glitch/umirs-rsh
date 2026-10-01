@@ -925,6 +925,35 @@ if (codigo) {
 }
 
 </script>
+<script>
+if ("serviceWorker" in navigator) {
 
+  window.addEventListener("load", function () {
+
+    navigator.serviceWorker
+      .register("./service-worker.js")
+
+      .then(function (registro) {
+
+        console.log(
+          "UMIRS RSH Offline activo:",
+          registro.scope
+        );
+
+      })
+
+      .catch(function (error) {
+
+        console.error(
+          "Error activando modo offline:",
+          error
+        );
+
+      });
+
+  });
+
+}
+</script>
 </body>
 </html>
